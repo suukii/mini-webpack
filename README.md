@@ -25,6 +25,10 @@
 
 > Nodejs 同步和异步 API 的命名套路是，同步 API 一般都有 Sync 字样，而异步 API 就没有。
 
+#### fs.mkdir(path[, options], callback)
+
+异步创建一个目录。默认情况下，如果目录已经存在的话，这个方法会报错，不过可以通过第二个参数设置 `{ recursive: true }` 来解决这个问题。
+
 #### fs.writeFile(file, data[, options], callback)
 
 异步往一个文件中写入数据，而且会覆盖原本的内容。
@@ -33,8 +37,6 @@
 - `data` 是要写入的数据；
 - `options` 中可以指定写入数据的格式，因为我们要写入的是字符串，所以可以在此指定 `{ encoding: 'utf-8' }`；
 - `callback` 写入操作完成后的回调函数，在这里也可以拿到报错信息。
-
-> 如果要写入的文件不存在的话，这个方法会报错。为了简化操作，在这个例子里我们就先自己新建一个 `dist/bundle.js` 文件，用来存放打包后的代码。
 
 #### path.resolve([...path])
 
@@ -316,15 +318,24 @@ const bundle = options => {
 
   // 生成代码并输出到文件系统
   const code = createAssets(modules)
-  fs.writeFile(path.resolve(output.path, output.filename), code, {
-    encoding: 'utf-8'
-  }, function (err, data) {
-    if (err) throw err
+  fs.mkdir(path.resolve(output.path), {
+    recursive: true
+  }, err => {
+    if (err) {
+      throw err
+    }
+    fs.writeFile(path.resolve(output.path, output.filename), code, {
+      encoding: 'utf-8'
+    }, function (err, data) {
+      if (err) throw err
+    })
   })
 }
 ```
 
-至此我们就完成了一个打包工具最简单的功能，根据入口文件扫描依赖，并进行模块化加载。
+## 小结
+
+至此我们就完成了一个打包工具最简单的功能，根据入口文件扫描依赖，并进行模块化加载。在项目中运行 `npm run demo` 看看打包效果吧。
 
 ## Reference
 

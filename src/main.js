@@ -130,10 +130,17 @@ const bundle = options => {
 
   // 生成代码并输出到文件系统
   const code = createAssets(modules)
-  fs.writeFile(path.resolve(output.path, output.filename), code, {
-    encoding: 'utf-8'
-  }, function (err, data) {
-    if (err) throw err
+  fs.mkdir(path.resolve(output.path), {
+    recursive: true
+  }, err => {
+    if (err) {
+      throw err
+    }
+    fs.writeFile(path.resolve(output.path, output.filename), code, {
+      encoding: 'utf-8'
+    }, function (err, data) {
+      if (err) throw err
+    })
   })
 }
 
