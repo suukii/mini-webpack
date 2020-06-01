@@ -337,6 +337,8 @@ const bundle = options => {
 
 至此我们就完成了一个打包工具最简单的功能，根据入口文件扫描依赖，并进行模块化加载。在项目中运行 `npm run demo` 看看打包效果吧。
 
+[下一节](https://github.com/suukii/mini-webpack/tree/part2)，引入 loader 支持。
+
 ## Reference
 
 [https://github.com/azl397985856/mono-webpack/tree/lecture/part-1](https://github.com/azl397985856/mono-webpack/tree/lecture/part-1)
