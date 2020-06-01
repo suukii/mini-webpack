@@ -1,20 +1,17 @@
 {
-  "name": "webpack_suukii",
+  "name": "mini-webpack",
   "version": "1.0.0",
-  "description": "",
+  "description": "A naive impletementation of webpack. Help to understand how webpack works under the hood.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "demo": "node example/index.js"
   },
-  "author": "",
+  "author": "suukii",
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.10.1",
     "@babel/parser": "^7.10.1",
-    "@babel/traverse": "^7.10.1"
-  },
-  "devDependencies": {
+    "@babel/traverse": "^7.10.1",
     "@babel/preset-env": "^7.10.1"
   }
 }
